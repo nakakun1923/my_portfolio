@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中 陽 - ポートフォリオ</title>
+    <style>
+        .skill-bar {
+            background-color: #e5e7eb;
+            border-radius: 0.5rem;
+            height: 0.5rem;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+    
+        .skill-progress {
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            height: 100%;
+            width: 0%;
+            transition: width 1s ease-in-out;
+            border-radius: 0.5rem;
+        }
+    
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+    
+        /* スムーススクロールの改善 */
+        html {
+            scroll-behavior: smooth;
+        }
+    
+        /* ローディングアニメーション */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    
+        .loading {
+            animation: pulse 2s infinite;
+        }
+    </style>
+    <script src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-bold text-2xl text-blue-600">My Portfolio</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-200">About</a>
+                    <a href="#experience" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-200">Experience</a>
+                    <a href="#skills" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-200">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-200">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-200">Contact</a>
+                </div>
+                <button class="md:hidden text-gray-700 hover:text-blue-600" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white border-t border-gray-200 hidden" id="mobile-menu">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#about" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">About</a>
+                <a href="#experience" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">Experience</a>
+                <a href="#skills" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">Skills</a>
+                <a href="#projects" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">Projects</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-blue-600 transition-colors duration-200">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Me</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+                <p class="text-lg text-gray-600">簡単なプロフィールを記載します。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">基本情報</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-user text-blue-600 w-5 mr-3"></i>
+                                <span>名前：中陽（なか　あきら）</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-birthday-cake text-blue-600 w-5 mr-3"></i>
+                                <span>年齢：26歳（1999/01/23生まれ）</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 w-5 mr-3"></i>
+                                <span>出身地：香川県</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-heart text-blue-600 w-5 mr-3"></i>
+                                <span>趣味：水泳、ドライブ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">経歴</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-blue-600 pl-4">
+                                <div class="text-sm text-gray-600">2014/04 ~ 2017/03</div>
+                                <div class="font-medium">香川県立高松北高等学校</div>
+                            </div>
+                            <div class="border-l-4 border-blue-600 pl-4">
+                                <div class="text-sm text-gray-600">2017/04 ~ 2021/03</div>
+                                <div class="font-medium">高知大学 理工学部 地球環境防災学科</div>
+                            </div>
+                            <div class="border-l-4 border-blue-600 pl-4">
+                                <div class="text-sm text-gray-600">2021/04 ~ 2023/03</div>
+                                <div class="font-medium">高知大学大学院（気象学を専攻）</div>
+                            </div>
+                            <div class="border-l-4 border-blue-600 pl-4">
+                                <div class="text-sm text-gray-600">2023/04 ~ 2024/05</div>
+                                <div class="font-medium">株式会社ミトラ web系エンジニア</div>
+                            </div>
+                            <div class="border-l-4 border-green-600 pl-4">
+                                <div class="text-sm text-gray-600">2024/06 ~ 現在</div>
+                                <div class="font-medium">株式会社メソッドプラス web系エンジニア</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Experience</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600">実務経験の詳細についてです。</p>
+            </div>
+            
+            <div class="space-y-12">
+                <!-- 前職の経験 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">株式会社ミトラ（1社目）</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-600">2023年4月 〜 2024年5月</p>
+                            <span class="text-sm text-gray-500">1年2ヶ月</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">主な業務内容</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                    <span>自社製品（産婦人科向け電子カルテ）の保守開発</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                    <span>導入後のシステム面に関するサポートセンター業務</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                    <span>サーバの定期保守作業</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="mt-4">
+                                <h5 class="text-sm font-semibold text-gray-900 mb-2">使用技術</h5>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">HTML/CSS</span>
+                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">javascript(jQuery)</span>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">PHP(CakePHP)</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">PostgreSQL</span>
+                                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Apache</span>
+                                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">SVN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 現在の職歴 -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">株式会社メソッドプラス（2社目・現職）</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-600 mt-1">2024年6月 〜 現在</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">主な業務内容</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                    <span>大手家電販売店のECサイト/バックオフィス管理システムに関する保守開発</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                    <span>上記以外のECサイト(既存クライアント)の保守開発</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="mt-4">
+                                <h5 class="text-sm font-semibold text-gray-900 mb-2">使用技術</h5>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">HTML/CSS</span>
+                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">javascript(jQuery)</span>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">PHP(CakePHP)</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">MySQL</span>
+                                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Nginx</span>
+                                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Docker</span>
+                                    <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Git/GitHub</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Skills</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto text-center">会社業務ではPHPでのwebアプリケーション開発、プライベートではReact・Goでの開発をしています。</p>
+            </div>
+            <!-- シンプルなスキル表示 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Frontend</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <i class="fab fa-react text-5xl text-blue-500 mb-2"></i>
+                            <div class="text-sm text-gray-600">
+                                <div>React <span class="text-gray-500">(趣味)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js Logo" class="w-12 h-12 mx-auto mb-2" />
+                            <div class="text-sm text-gray-600">
+                                <div>Next.js <span class="text-gray-500">(趣味)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Backend</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <i class="fab fa-php text-5xl text-purple-600 mb-2"></i>
+                            <div class="text-sm text-gray-600">
+                                <div>CakePHP <span class="text-blue-600 font-medium">(実務2年)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png" alt="Go Logo" class="w-12 h-12 mx-auto mb-2" />
+                            <div class="text-sm text-gray-600">
+                                <div>Gin <span class="text-gray-500">(趣味)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Database</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL Logo" class="w-12 h-12 mx-auto mb-2" />
+                            <div class="text-sm text-gray-600">
+                                <div>MySQL <span class="text-blue-600 font-medium">(実務1年)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://cdn.simpleicons.org/postgresql/336791" alt="PostgreSQL Logo" class="w-12 h-12 mx-auto mb-2" />
+                            <div class="text-sm text-gray-600">
+                                <div>PostgreSQL <span class="text-blue-600 font-medium">(実務1年)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">DevOps</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <i class="fab fa-docker text-5xl text-blue-600 mb-2"></i>
+                            <div class="text-sm text-gray-600">
+                                <div>Docker <span class="text-blue-600 font-medium">(実務1年)</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fab fa-github text-4xl text-gray-800 mb-2"></i>
+                            <div class="text-sm text-gray-600">
+                                <div>Git/GitHub <span class="text-blue-600 font-medium">(実務1年)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Projects</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600">個人開発プロジェクトの紹介です。</p>
+            </div>
+            <div class="grid grid-cols-1 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-code text-2xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-900 flex items-center">水泳の試合管理用のwebアプリケーション SwimCL<img src="images/swimcl_logo.png" alt="SwimCL Logo" class="h-12 ml-2 align-middle"/></h3>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-3">アプリケーションに関する情報</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                <span>
+                                    <span class="font-semibold">概要：</span>
+                                    水泳の試合結果を登録し、試合結果のタイム振り返りを便利にするアプリケーション
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                <span>
+                                    <span class="font-semibold">経緯：</span>
+                                    水泳の試合結果が画像ベースのものが多く、試合間のタイム比較がめんどくさいと感じていたから
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                <span>
+                                    <span class="font-semibold">機能：</span>
+                                    <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
+                                        <li>ユーザ登録、ログイン</li>
+                                        <li>結果登録（画像からタイム取得）、更新、削除</li>
+                                        <li>結果一覧（種目ごとや長水路、短水路ごとも可）</li>
+                                        <li>ベストタイムとの比較 など</li>
+                                    </ul>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                                <span>
+                                    <span class="font-semibold">改善したい部分：</span>
+                                    <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
+                                        <li>AI駆動で作ったプログラムの確認作業（進行中）</li>
+                                        <li>画像文字認識の精度向上</li>
+                                        <li>UI/UXの向上</li>
+                                        <li>サービス化に向けて、インフラ整備</li>
+                                        <li>セキュリティ面の強化</li>
+                                    </ul>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">HTML/CSS</span>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">javascript(React,Vite)</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Go(Gin)</span>
+                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">PostgreSQL</span>
+                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Docker</span>
+                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Git/GitHub/Github Pages</span>
+                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Render</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://nakakun1923.github.io/swim_cl_frontend/"
+                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
+                           onclick="if(!confirm('現在はテスト公開中ですので、予期しないエラーが発生する可能性があります。続けますか？')){return false;}">
+                            アプリケーションへ移動（GitHub Pagesで公開中）
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
+                <p class="text-lg text-gray-600">連絡先等は下記です。</p>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Email</h3>
+                                <a href="mailto:akira.123.naka@gmail.com" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                    akira.123.naka@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-github text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">GitHub</h3>
+                                <a href="https://github.com/nakakun1923" target="_blank" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                    @nakakun1923
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 中 陽 (Akira Naka). All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
