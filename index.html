@@ -419,12 +419,22 @@
                         <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Git/GitHub/Github Pages</span>
                         <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Render</span>
                     </div>
-                    <div class="flex gap-4">
-                        <a href="https://nakakun1923.github.io/swim_cl_frontend/"
-                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-200"
-                           onclick="if(!confirm('現在はテスト公開中ですので、予期しないエラーが発生する可能性があります。続けますか？')){return false;}">
-                            アプリケーションへ移動（GitHub Pagesで公開中）
-                        </a>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                            <h5 class="text-sm font-semibold text-blue-900 mb-2">テストアカウント情報</h5>
+                            <div class="text-sm text-blue-800 space-y-1">
+                                <div><span class="font-medium">メールアドレス：</span>test_user@test.com</div>
+                                <div><span class="font-medium">パスワード：</span>testuser</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <a href="https://nakakun1923.github.io/swim_cl_frontend/"
+                               class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+                               onclick="if(!confirm('現在はテスト公開中ですので、予期しないエラーが発生する可能性があります。続けますか？')){return false;}">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                アプリケーションへ移動（GitHub Pagesで公開中）
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
