@@ -137,18 +137,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('scroll', updateOnScroll);
-
-    // 生年月日
-    const birthDate = new Date('1999-01-23');
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    // 誕生日がまだ来ていなければ1歳引く
-    if (
-        today.getMonth() < birthDate.getMonth() ||
-        (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
-    ) {
-        age--;
-    }
-    document.getElementById('age').textContent = age;
 });
 
+
+// 生年月日
+const birthDate = new Date('1999-01-23');
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+// 誕生日がまだ来ていなければ1歳引く
+if (
+    today.getMonth() < birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())
+) {
+    age--;
+}
+document.getElementById('age').textContent = age;
